@@ -4,15 +4,19 @@ import json
 
 def get_db_service():
     context = dict(user="root", password="dbuserdbuser",
-                   host="localhost", port=3306)
+                   host="35.226.242.252", port=3306)
+    
     data_service = MySQLRDBDataService(context=context)
+    
+    if data_service is None:
+        raise Exception("Could not create data service")
     return data_service
 
 
 def t1():
     data_service = get_db_service()
     result = data_service.get_data_object(
-        "course_management",
+        "p1_database",
         "course_sections",
         key_field="sis_course_id",
         key_value="COMSW4153_001_2024_3"

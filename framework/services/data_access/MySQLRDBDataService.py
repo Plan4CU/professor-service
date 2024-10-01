@@ -13,15 +13,20 @@ class MySQLRDBDataService(DataDataService):
         super().__init__(context)
 
     def _get_connection(self):
-        connection = pymysql.connect(
-            host=self.context["host"],
-            port=self.context["port"],
-            user=self.context["user"],
-            passwd=self.context["password"],
-            cursorclass=pymysql.cursors.DictCursor,
-            autocommit=True
-        )
-        return connection
+        try:
+            connection = pymysql.connect(
+                host=self.context["host"],
+                port=self.context["port"],
+                user=self.context["user"],
+                passwd=self.context["password"],
+                cursorclass=pymysql.cursors.DictCursor,
+                autocommit=True
+            )
+            print("Connection to Google Cloud MySQL instance succeeded")
+            return connection
+        except pymysql.MySQLError as e:
+            print("Error connecting to Google Cloud MySQL instance:", e)
+            return None 
 
     def get_data_object(self,
                         database_name: str,
