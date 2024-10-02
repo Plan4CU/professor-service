@@ -17,7 +17,8 @@ app.include_router(courses.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Hello Bigger Applications!"}
+    print()
+    return {"message": "Hello From Microservice 2 from within a Docker Container!"}
 
 
 if __name__ == "__main__":
