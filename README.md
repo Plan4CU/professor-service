@@ -3,7 +3,7 @@
 Simple microservice application for the first project in W4153 -- Cloud Computing.
 
 ## Running locally
-1. Clone the repo using: <code>git clone https://github.com/dwr2118/W4153-Team6-Project-UserApp.git</code> on your machine.
+1. Clone the repo using: <code>git clone https://github.com/Plan4CU/Plan4CU-ProfessorScrape.git</code> on your machine.
 2. Ensure that python is installed on your machine by doing <code>python3 --version</code> or <code>python --version</code>.
 3. Create and enable a python virtual environment on your machine whether it be local or a virtual machine on GCP.
 4. Download all the necessary packages using: <code>pip install -r requirements.txt</code>.
