@@ -7,7 +7,7 @@ Simple microservice application for the first project in W4153 -- Cloud Computin
 2. Ensure that python is installed on your machine by doing <code>python3 --version</code> or <code>python --version</code>.
 3. Create and enable a python virtual environment on your machine whether it be local or a virtual machine on GCP.
 4. Download all the necessary packages using: <code>pip install -r requirements.txt</code>.
-5. Now ensure you have the correct public IP address to the MySQL database held in GCP by running the test method from within the root folder of the repo: <code>python3 -m pymysql</code>. This should return a json object like such: 
+5. Now ensure you have the correct public IP address to the MySQL database held in GCP by running the test method from within the root folder of the repo: <code>python3 -m tests.tmysqldb</code>. This should return a json object like such: 
 ```json
  {
     "course_id": 204283,
