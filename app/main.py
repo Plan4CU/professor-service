@@ -24,7 +24,7 @@ def hello_world():
     if where_am_i is None:
         where_am_i = "NOT IN DOCKER"
 
-    return f'Hello, from {where_am_i}! I changed.'
+    return f"Hello, from {where_am_i}! I changed and I'm microservice 3."
 
 
 if __name__ == "__main__":
