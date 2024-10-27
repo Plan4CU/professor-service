@@ -2,23 +2,24 @@ from typing import Any
 
 from framework.resources.base_resource import BaseResource
 
-from app.models.course import CourseSection
+from app.models.professor import Professor
 from app.services.service_factory import ServiceFactory
 
 
-class CourseResource(BaseResource):
+class ProfessorResource(BaseResource):
 
     def __init__(self, config):
         super().__init__(config)
 
         # TODO -- Replace with dependency injection.
-        #
-        self.data_service = ServiceFactory.get_service("CourseResourceDataService")
-        self.database = "p1_database"
-        self.collection = "course_sections"
-        self.key_field= "sis_course_id"
+        # TODO: get_service allows you to choose which SQL DB to connect to?
+        self.data_service = ServiceFactory.get_service("ProfessorResourceDataService")
+        self.database = "Professor" # TODO: change to the name of the DB 
+        self.collection = "course_sections" # TODO: change to the name of the table 
+        # TODO: change to the name of the column you are searching for in table 
+        self.key_field= "sis_course_id" 
 
-    def get_by_key(self, key: str) -> CourseSection:
+    def get_by_key(self, key: str) -> Professor:
 
         d_service = self.data_service
 

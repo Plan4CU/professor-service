@@ -43,4 +43,21 @@ In the browser, navigate to ```http://0.0.0.0:8000/docs``` You will see somethin
 
 If you see this page, you are done for now.
 
+TODO: Understand how you go from object data model into hitting DB from API request
+
+Models = objects that will be populated with data from the QB query 
+
+Resources = wrapper for how to call the DB, make the different 
+query wrappers here, like insert, update, search, etc. 
+
+Routers = defining the routes for each specific model aka table into 
+the DB, here define the different routes that are hittable by the user 
+given API requests 
+
+Service factory = creates the connection to the Database,
+ so maybe you can define the different connections to other DBs or microservices?
+# TODO: how to handle connecting to other APIs and making requests 
+
+
+
 
