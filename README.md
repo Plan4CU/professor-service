@@ -1,24 +1,40 @@
-# W4153-P1-Application
+# Professor Microservice
 
-Simple microservice application for the first project in W4153 -- Cloud Computing.
+This repository is meant to allow for the access of professor information stored
+in a dedicated professor SQL database. This microservice is built on the data
+model that the Professor only has a UNI, First Name and Last Name. In further sprints, 
+we will be able to expand on this data model to include more information like a middle name, department,
+etc. 
 
-## Running locally
-1. Clone the repo using: <code>git clone https://github.com/Plan4CU/Plan4CU-ProfessorScrape.git</code> on your machine.
-2. Ensure that python is installed on your machine by doing <code>python3 --version</code> or <code>python --version</code>.
-3. Create and enable a python virtual environment on your machine whether it be local or a virtual machine on GCP.
-4. Download all the necessary packages using: <code>pip install -r requirements.txt</code>.
-5. Now ensure you have the correct public IP address to the MySQL database held in GCP by running the test method from within the root folder of the repo: <code>python3 -m tests.tmysqldb</code>. This should return a json object like such: 
-```json
- {
-    "course_id": 204283,
-    "course_name": "COMSW4153_001_2024_3 - Cloud Computing",
-    "uuid": "3jHCxUV0ck9Z8TF1sZeI8WTx47olDGkX1YPL3USM",
-    "created_at": "024-04-05T00:58:50Z",
-    "course_code": "COMSW4153_001_2024_3 - Cloud Computing",
-    "sis_course_id": "COMSW4153_001_2024_3",
-    "course_no": "COMSW4153",
-    "section": "001",
-    "course_year": "2024",
-    "semester": "3"
-}
-```
+## Overview
+
+FastAPI for our route handling framework and MySQL used for the databases (DB). 
+The DB wrapper for going from python to SQL queries is reverse engineerable starting
+from ```MySQLRDDBDataService.py``` file. You can find the OpenAPI spec 
+when you launch the application and visit the /docs/ endpoint. 
+
+To launch the microservice, utilize the command ```fastapi run``` and, 
+for restarting the server after file changes in development, I use ```fastapi run --reload```. 
+
+## Installation
+
+For local testing, I suggest DataGrip to allow for an easier time setting up 
+your database and actually visualizing what the table rows look like. 
+I use VS Code for the development of this microservice. 
+
+## Running the Application
+
+Simply enable the virtual environment for the virtual machine you are in. First make 
+the virtual environment using: ```python -m venv```, then
+activate your venv using ```source venv/bin/activate```. 
+Get all python dependencies using ```pip install -r requirements.txt```. 
+Then, you need to populate these following environment variables to configure
+the utilized database:
+- DB_USER=Username to access MySQL DB 
+- DB_PASSWORD=Password to access MySQL DB 
+- DB_HOST=Input either URL to the Cloud SQL instance or just use localhost for locally testing
+- DB_PORT=Default set to 3306 but change it accordingly to the Cloud SQL instance 
+
+
+
+
