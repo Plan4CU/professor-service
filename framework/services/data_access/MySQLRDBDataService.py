@@ -1,3 +1,4 @@
+import random
 import pymysql
 from .BaseDataService import DataDataService
 
@@ -47,6 +48,41 @@ class MySQLRDBDataService(DataDataService):
             cursor = connection.cursor()
             cursor.execute(sql_statement, [key_value])
             result = cursor.fetchone()
+        except Exception as e:
+            if connection:
+                connection.close()
+
+        return result
+
+    def insert_data_object(self,
+                        database_name: str,
+                        collection_name: str,
+                        first_name: str,
+                        last_name: str):
+        """
+        See base class for comments.
+        """
+        p_uni = first_name[0] + last_name[0] + str(random.randint(0, 100))
+        connection = None
+        result = None
+
+        try:
+            
+            sql_statement = f"INSERT INTO {database_name}.{collection_name} " + \
+                            f"(p_uni, first_name, last_name) VALUES (%s, %s, %s)"
+                        
+            connection = self._get_connection()
+            cursor = connection.cursor()
+            cursor.execute(sql_statement, [p_uni, first_name, last_name])
+            # result = cursor.fetchone()
+            
+            # grab the Professor row just made 
+            check_sql_statement = f"SELECT * FROM {database_name}.{collection_name} " + \
+                        f"where {p_uni}=%s"
+            
+            # call the function to make the query itself 
+            result = self.get_data_object(database_name, collection_name, "p_uni", p_uni)
+            # print("SQL search result: " , result)
         except Exception as e:
             if connection:
                 connection.close()

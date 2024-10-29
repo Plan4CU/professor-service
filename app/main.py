@@ -4,6 +4,7 @@ import os
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import courses
+from app.routers import professors
 where_am_i = os.environ.get("WHEREAMI", None)
 
 app = FastAPI()
@@ -15,6 +16,7 @@ app.add_middleware(
 
 
 app.include_router(courses.router)
+app.include_router(professors.router)
 
 
 @app.get('/')
