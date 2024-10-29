@@ -43,7 +43,8 @@ class ProfessorResource(BaseResource):
         )
 
         # cast the data returned into a professor object 
-        result = Professor(**result)
+        if result:
+            result = Professor(**result)
         return result
     
     ''' 

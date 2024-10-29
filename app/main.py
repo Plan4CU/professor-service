@@ -1,3 +1,4 @@
+import json
 from fastapi import Depends, FastAPI
 import uvicorn
 import os
@@ -14,7 +15,14 @@ app.add_middleware(
     allow_origins=['*']
 )
 
+def custom_openapi():
+    if app.openapi_schema:
+        return app.openapi_schema
+    with open("openapi.json") as f:
+        app.openapi_schema = json.load(f)
+        return app.openapi_schema
 
+app.openapi = custom_openapi
 app.include_router(courses.router)
 app.include_router(professors.router)
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException, status
 
 # from app.models.course import CourseSection # import the object 
 # from app.resources.course_resource import CourseResource # import the DB wrapper for the object 
@@ -29,7 +29,7 @@ async def get_professors(P_UNI: str) -> Professor:
 
 # Create a new professor, must take in first name, last name and p_uni
 # gets generated for them 
-@router.post("/Professor/insert/{first_name}&{last_name}", tags=["users"])
+@router.post("/Professor/insert/{first_name}&{last_name}", tags=["users"], status_code=status.HTTP_201_CREATED)
 async def insert_professor(first_name: str, last_name:str) -> Professor:
     
     # make an instance of the class and then run the DB wrapper
