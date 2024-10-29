@@ -1,62 +1,39 @@
-# W4153-P1-Application
+# Professor Microservice
 
-The link to the repository is: https://github.com/donald-f-ferguson/W4153-P1-Application
+This repository is meant to allow for the access of professor information stored
+in a dedicated professor SQL database. This microservice is built on the data
+model that the Professor only has a UNI, First Name and Last Name. In further sprints, 
+we will be able to expand on this data model to include more information like a middle name, department,
+etc. 
 
 ## Overview
 
-Project 1 in W4153 - Cloud Computing is to build a simple [fullstack web application.](https://medium.com/@p.reaboi.frontend/understanding-full-stack-development-architecture-a-comprehensive-guide-548f8cba6d91)
+FastAPI for our route handling framework and MySQL used for the databases (DB). 
+The DB wrapper for going from python to SQL queries is reverse engineerable starting
+from ```MySQLRDDBDataService.py``` file. You can find the OpenAPI spec 
+when you launch the application and visit the /docs/ endpoint. 
 
-This project is the application/business logic project. It is a
-[FastAPI](https://fastapi.tiangolo.com/) application.
-
-|   <img src="fullstack.jpg">   |
-|:-----------------------------:|
-| __Fulltsack Web Application__ |
-
+To launch the microservice, utilize the command ```fastapi run``` and, 
+for restarting the server after file changes in development, I use ```fastapi run --reload```. 
 
 ## Installation
 
-You must create a new [Python virtual environment](https://docs.python.org/3/library/venv.html) for this application.
-I use [PyCharm](https://www.jetbrains.com/pycharm/), and I recommend that you do the same. You
-can follow the [PyCharm instructions](https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html) for creating a virtual environment for your project.
-Open a terminal window in the virtual environment and enter
-
-```pip install -r requirements.txt```
-
-You will see several information and warning messages, and you can ignore them. As long as
-you did not get fatal errors, your installation worked.
+For local testing, I suggest DataGrip to allow for an easier time setting up 
+your database and actually visualizing what the table rows look like. 
+I use VS Code for the development of this microservice. 
 
 ## Running the Application
 
-Follow the PyCharm instructions for running the application. You will see something that looks like
-
-<img src='apprun.jpg'>
-
-Click on the URL or copy/paste and open in a browser. You will see something that
-looks like
-
-<img src="ui1.jpg">
-
-In the browser, navigate to ```http://0.0.0.0:8000/docs``` You will see something like
-
-<img src="ui2.jpg">
-
-If you see this page, you are done for now.
-
-TODO: Understand how you go from object data model into hitting DB from API request
-
-Models = objects that will be populated with data from the QB query 
-
-Resources = wrapper for how to call the DB, make the different 
-query wrappers here, like insert, update, search, etc. 
-
-Routers = defining the routes for each specific model aka table into 
-the DB, here define the different routes that are hittable by the user 
-given API requests 
-
-Service factory = creates the connection to the Database,
- so maybe you can define the different connections to other DBs or microservices?
-# TODO: how to handle connecting to other APIs and making requests 
+Simply enable the virtual environment for the virtual machine you are in. First make 
+the virtual environment using: ```python -m venv```, then
+activate your venv using ```source venv/bin/activate```. 
+Get all python dependencies using ```pip install -r requirements.txt```. 
+Then, you need to populate these following environment variables to configure
+the utilized database:
+- DB_USER=Username to access MySQL DB 
+- DB_PASSWORD=Password to access MySQL DB 
+- DB_HOST=Input either URL to the Cloud SQL instance or just use localhost for locally testing
+- DB_PORT=Default set to 3306 but change it accordingly to the Cloud SQL instance 
 
 
 
