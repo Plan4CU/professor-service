@@ -1,10 +1,20 @@
 from framework.services.data_access.MySQLRDBDataService import MySQLRDBDataService
 import json
+import os
+from dotenv import load_dotenv
 
 
 def get_db_service():
-    context = dict(user="root", password="dbuserdbuser",
-                   host="localhost", port=3306)
+    
+    load_dotenv()
+    
+    db_user = str(os.getenv("DB_USER"))
+    db_password = str(os.getenv("DB_PASSWORD"))
+    db_host = str(os.getenv("DB_HOST")) # populate this with the URL of the DB
+    db_port = int(os.getenv("DB_PORT", 3306)) # default to 3306 if not set 
+    
+    context = dict(user=db_user, password=db_password,
+                   host=db_host, port=db_port)
     
     data_service = MySQLRDBDataService(context=context)
     
