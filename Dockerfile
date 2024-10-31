@@ -3,7 +3,7 @@
 #
 FROM python:3.11-alpine
 
-# The directory in the container where the app will run.
+# The directory in the container where the app-bk will run.
 #
 WORKDIR /app_working
 
@@ -27,5 +27,5 @@ EXPOSE 8000
 #
 ENV WHEREAMI=DOCKER
 
-# Run the app. using fastapi run command
+# Run the app-bk. using fastapi run command
 CMD ["fastapi", "run"]

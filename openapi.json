@@ -1,100 +1,20 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Professor API",
+    "title": "Professors API",
     "version": "1.0.0",
-    "description": "An API for managing professors in a university system."
+    "description": "API for managing professors"
   },
   "paths": {
-    "/Professor/search/{P_UNI}": {
+    "/professors/{p_uni}": {
       "get": {
-        "summary": "Retrieve a professor by P_UNI",
-        "parameters": [
-          {
-            "name": "P_UNI",
-            "in": "path",
-            "required": true,
-            "description": "The university ID of the professor",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A professor object",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Professor"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Professor not found"
-          }
-        }
-      }
-    },
-    "/Professor/insert/{first_name}&{last_name}": {
-      "post": {
-        "summary": "Insert a new professor",
-        "parameters": [
-          {
-            "name": "first_name",
-            "in": "path",
-            "required": true,
-            "description": "The first name of the professor",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "last_name",
-            "in": "path",
-            "required": true,
-            "description": "The last name of the professor",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Professor created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Professor"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          }
-        }
-      }
-    },
-    "/Professor/update/firstname/{p_uni}&{new_first_name}": {
-      "patch": {
-        "summary": "Update the first name of a professor",
+        "summary": "Get a professor by p_uni",
+        "operationId": "getProfessor",
         "parameters": [
           {
             "name": "p_uni",
             "in": "path",
             "required": true,
-            "description": "The university ID of the professor",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "new_first_name",
-            "in": "path",
-            "required": true,
-            "description": "The new first name of the professor",
             "schema": {
               "type": "string"
             }
@@ -102,7 +22,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Professor first name updated successfully",
+            "description": "Professor found",
             "content": {
               "application/json": {
                 "schema": {
@@ -115,34 +35,33 @@
             "description": "Professor not found"
           }
         }
-      }
-    },
-    "/Professor/update/lastname/{p_uni}&{new_last_name}": {
+      },
       "patch": {
-        "summary": "Update the last name of a professor",
+        "summary": "Update a professor by p_uni",
+        "operationId": "updateProfessor",
         "parameters": [
           {
             "name": "p_uni",
             "in": "path",
             "required": true,
-            "description": "The university ID of the professor",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "new_last_name",
-            "in": "path",
-            "required": true,
-            "description": "The new last name of the professor",
             "schema": {
               "type": "string"
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Professor"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": "Professor last name updated successfully",
+            "description": "Professor updated",
             "content": {
               "application/json": {
                 "schema": {
@@ -155,17 +74,15 @@
             "description": "Professor not found"
           }
         }
-      }
-    },
-    "/Professor/delete/{p_uni}": {
+      },
       "delete": {
-        "summary": "Delete a professor",
+        "summary": "Delete a professor by p_uni",
+        "operationId": "deleteProfessor",
         "parameters": [
           {
             "name": "p_uni",
             "in": "path",
             "required": true,
-            "description": "The university ID of the professor",
             "schema": {
               "type": "string"
             }
@@ -173,10 +90,98 @@
         ],
         "responses": {
           "204": {
-            "description": "Professor deleted successfully"
+            "description": "Professor deleted"
           },
           "404": {
             "description": "Professor not found"
+          }
+        }
+      }
+    },
+    "/professors": {
+      "get": {
+        "summary": "Get all professors",
+        "operationId": "getAllProfessors",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "professor_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of professors",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Professor"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {"type": "integer"
+                    },
+                    "size": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new professor",
+        "operationId": "createProfessor",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Professor"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Professor created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Professor"
+                }
+              }
+            }
           }
         }
       }
@@ -188,19 +193,21 @@
         "type": "object",
         "properties": {
           "p_uni": {
-            "type": "string",
-            "description": "The university ID of the professor"
+            "type": "string"
           },
           "first_name": {
-            "type": "string",
-            "description": "The first name of the professor"
+            "type": "string"
           },
           "last_name": {
-            "type": "string",
-            "description": "The last name of the professor"
+            "type": "string"
           }
         },
-        "required": ["p_uni", "first_name", "last_name"]
+        "required": ["p_uni", "first_name", "last_name"],
+        "example": {
+          "p_uni": "Cheese123",
+          "first_name": "John",
+          "last_name": "Nutz"
+        }
       }
     }
   }
