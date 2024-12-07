@@ -9,7 +9,7 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>edu.plan4cu</groupId>
-  <artifactId>course-service</artifactId>
+  <artifactId>professor-service</artifactId>
   <version>1.0</version>
   <name>course-service</name>
   <description>Course Service for Schedule Management System</description>

@@ -1,15 +1,14 @@
 package edu.plan4cu.professor.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "Professor")
 @Data
-@Getter
-@Setter
 public class Professor {
     @Id
     @Column(name = "p_uni")
